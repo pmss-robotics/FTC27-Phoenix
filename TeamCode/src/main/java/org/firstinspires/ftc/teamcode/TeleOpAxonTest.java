@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.TurretSubsystem;
 
-@TeleOp(name = "Teleop2", group = "Main")
+@TeleOp(name = "TeleopTurretTest", group = "Main")
 public class TeleOpAxonTest extends LinearOpMode {
     @Override
     public void runOpMode(){

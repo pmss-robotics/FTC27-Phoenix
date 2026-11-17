@@ -14,6 +14,7 @@ public class TurretSubsystem {
     private static final double MAX_VOLTAGE = 3.3;
 
     public TurretSubsystem(HardwareMap hardwareMap, Telemetry telemetry){
+        //initialize both motors
         servoR = hardwareMap.get(Servo.class, "servoR");
         servoL = hardwareMap.get(Servo.class, "servoL");
         //turretEncoder = hardwareMap.get(AnalogInput.class, "servoEncoder");
