@@ -37,7 +37,7 @@ public class RedTeleop extends LinearOpMode {
     private static final double TARGET_Y = 72;
 
     // ---- Turret mapping (tune these) ----
-    private static final double SERVO_RANGE_DEG = 180;  // servo travel for position 0 -> 1
+    private static final double SERVO_RANGE_DEG = 300; // servo travel for position 0 -> 1
     private static final double TURRET_RATIO = 1.5;     // turret degrees per servo degree
     private static final double TURRET_SIGN = 1;        // flip to -1 if the turret aims the wrong way
     private static final double LOCKED_POSITION = 0.5;  // turret centered
@@ -73,6 +73,7 @@ public class RedTeleop extends LinearOpMode {
                     -gamepad1.right_stick_x,
                     pose.heading()));
             follower.update();
+            flywheel.update();
 
             // Intake
             if (gamepad1.right_bumper) intake.on();
@@ -101,7 +102,7 @@ public class RedTeleop extends LinearOpMode {
             telemetry.addData("turret servo pos", axons.getPosition());
             telemetry.addData("flywheel", flywheel.isRunning() ? "ON" : "off");
             telemetry.addData("target RPM", flywheel.getTargetRpm());
-            telemetry.addData("actual RPM", "%.0f", flywheel.getActualRpm());
+            telemetry.addData("actual RPM", flywheel.hasEncoder() ? String.format("%.0f%s", flywheel.getActualRpm(), flywheel.atSpeed() ? " (at speed)" : "") : "no encoder");
             telemetry.update();
         }
         follower.stop();

@@ -24,6 +24,11 @@ public class DualIntakeSubsystem extends SubsystemBase {
         motorB.setPower(INTAKE_POWER);
     }
 
+    public void reverse() {
+        motorA.setPower(-INTAKE_POWER);
+        motorB.setPower(-INTAKE_POWER);
+    }
+
     public void off() {
         motorA.setPower(0);
         motorB.setPower(0);

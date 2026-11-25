@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 /** Two Axon servos driven together, same direction. Position control (servo mode), 0..1. */
@@ -19,6 +21,18 @@ public class AxonSubsystem extends SubsystemBase {
         servoR.setDirection(Servo.Direction.FORWARD);
         servoL.setDirection(Servo.Direction.FORWARD);
         setPosition(position);
+    }
+
+    /**
+     * Widen both servos' pulse range to 500-2500 us so position 0..1 covers the full 350 deg
+     * (the hub default 600-2400 us only gives about 315 deg). The center (0.5) stays the same.
+     */
+    public void useFullPwmRange() {
+        for (Servo s : new Servo[]{servoR, servoL}) {
+            if (s instanceof ServoImplEx) {
+                ((ServoImplEx) s).setPwmRange(new PwmControl.PwmRange(500, 2500));
+            }
+        }
     }
 
     /** Move the target by delta (clamped 0..1). */
